@@ -3,7 +3,11 @@
 import { motion } from "framer-motion"
 import { ChevronRight } from "lucide-react"
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  onCtaClick?: () => void
+}
+
+export default function HeroSection({ onCtaClick }: HeroSectionProps) {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -70,10 +74,16 @@ export default function HeroSection() {
             </motion.p>
 
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 pt-4">
-              <button className="px-8 py-4 rounded-lg bg-gradient-to-r from-primary to-accent text-white font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all transform hover:scale-105">
+              <button
+                onClick={onCtaClick}
+                className="px-8 py-4 rounded-lg bg-gradient-to-r from-primary to-accent text-white font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all transform hover:scale-105"
+              >
                 Start Free Trial
               </button>
-              <button className="px-8 py-4 rounded-lg border border-primary/50 text-foreground hover:bg-background/50 font-semibold transition-all flex items-center justify-center gap-2">
+              <button
+                onClick={onCtaClick}
+                className="px-8 py-4 rounded-lg border border-primary/50 text-foreground hover:bg-background/50 font-semibold transition-all flex items-center justify-center gap-2"
+              >
                 Watch Demo <ChevronRight size={20} />
               </button>
             </motion.div>

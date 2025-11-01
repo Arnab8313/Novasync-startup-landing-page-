@@ -2,17 +2,21 @@
 
 import { motion } from "framer-motion"
 
-export default function ProductSection() {
+interface ProductSectionProps {
+  onCtaClick?: () => void
+}
+
+export default function ProductSection({ onCtaClick }: ProductSectionProps) {
   return (
     <section id="about" className="relative py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left - Gradient Placeholder instead of image */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            style={{ y: [0, -20, 0] }}
             className="relative"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 blur-3xl rounded-2xl" />
@@ -52,8 +56,8 @@ export default function ProductSection() {
             </div>
 
             <p className="text-lg text-foreground/70 leading-relaxed">
-              NovaSync unifies your entire team's workflow. Connect your favorite tools, automate repetitive tasks, and
-              let AI handle the heavy lifting. Say goodbye to context switching and hello to seamless collaboration.
+              Unify communication, automation, and collaboration — powered by AI. NovaSync eliminates silos and keeps
+              your hybrid team perfectly aligned.
             </p>
 
             <ul className="space-y-3">
@@ -80,6 +84,7 @@ export default function ProductSection() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={onCtaClick}
               className="mt-8 px-8 py-4 rounded-lg bg-gradient-to-r from-primary to-accent text-white font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all"
             >
               See How It Works

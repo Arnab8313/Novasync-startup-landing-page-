@@ -4,7 +4,11 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Menu, X } from "lucide-react"
 
-export default function Navbar() {
+interface NavbarProps {
+  onCtaClick?: () => void
+}
+
+export default function Navbar({ onCtaClick }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -19,7 +23,7 @@ export default function Navbar() {
   const navItems = [
     { label: "Home", href: "#home" },
     { label: "Features", href: "#features" },
-    { label: "About", href: "#about" },
+    { label: "Pricing", href: "#pricing" },
     { label: "Testimonials", href: "#testimonials" },
     { label: "Contact", href: "#contact" },
   ]
@@ -67,6 +71,7 @@ export default function Navbar() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
+              onClick={onCtaClick}
               className="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
             >
               Login
@@ -75,6 +80,7 @@ export default function Navbar() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.35 }}
+              onClick={onCtaClick}
               className="px-6 py-2 rounded-lg bg-gradient-to-r from-primary to-accent text-white font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all"
             >
               Start Free Trial
@@ -106,10 +112,22 @@ export default function Navbar() {
               </a>
             ))}
             <div className="pt-4 space-y-2">
-              <button className="w-full px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors">
+              <button
+                onClick={() => {
+                  setIsOpen(false)
+                  onCtaClick?.()
+                }}
+                className="w-full px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
+              >
                 Login
               </button>
-              <button className="w-full px-6 py-2 rounded-lg bg-gradient-to-r from-primary to-accent text-white font-semibold hover:shadow-lg transition-all">
+              <button
+                onClick={() => {
+                  setIsOpen(false)
+                  onCtaClick?.()
+                }}
+                className="w-full px-6 py-2 rounded-lg bg-gradient-to-r from-primary to-accent text-white font-semibold hover:shadow-lg transition-all"
+              >
                 Start Free Trial
               </button>
             </div>

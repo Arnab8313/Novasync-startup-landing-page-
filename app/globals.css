@@ -274,3 +274,18 @@ html {
 .animate-float {
   animation: float 4s ease-in-out infinite;
 }
+
+/* Added pulse animation utility for Pro pricing plan */
+@keyframes pulse-scale {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-scale {
+  animation: pulse-scale 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

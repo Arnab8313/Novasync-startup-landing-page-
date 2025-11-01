@@ -3,48 +3,36 @@
 import { motion } from "framer-motion"
 import { Check } from "lucide-react"
 
-export default function PricingSection() {
+interface PricingSectionProps {
+  onCtaClick?: () => void
+}
+
+export default function PricingSection({ onCtaClick }: PricingSectionProps) {
   const plans = [
     {
       name: "Starter",
-      price: "$29",
+      price: "₹499",
       period: "/month",
-      description: "Perfect for small teams",
-      features: ["Up to 5 team members", "AI meeting summaries", "Task sync", "5GB cloud storage", "Email support"],
-      cta: "Get Started",
+      description: "Perfect for small teams starting out",
+      features: ["3 Projects", "Basic AI Summaries", "Email Support"],
+      cta: "Sign Up",
       highlighted: false,
     },
     {
       name: "Pro",
-      price: "$79",
+      price: "₹999",
       period: "/month",
       description: "Most popular for growing teams",
-      features: [
-        "Up to 25 team members",
-        "Advanced AI features",
-        "Smart notifications",
-        "100GB cloud storage",
-        "Analytics dashboard",
-        "Priority support",
-        "Custom integrations",
-      ],
+      features: ["Unlimited Projects", "Priority AI Support", "Team Analytics"],
       cta: "Start Free Trial",
       highlighted: true,
     },
     {
       name: "Enterprise",
-      price: "Custom",
-      period: "pricing",
+      price: "₹1,999",
+      period: "/month",
       description: "For large organizations",
-      features: [
-        "Unlimited team members",
-        "All Pro features",
-        "Custom workflows",
-        "Unlimited storage",
-        "24/7 phone support",
-        "SSO & advanced security",
-        "Dedicated account manager",
-      ],
+      features: ["Custom Integrations", "Admin Console", "24×7 Support"],
       cta: "Contact Sales",
       highlighted: false,
     },
@@ -71,7 +59,7 @@ export default function PricingSection() {
   }
 
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section id="pricing" className="relative py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -80,8 +68,10 @@ export default function PricingSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">Simple, Transparent Pricing</h2>
-          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">Choose the perfect plan for your team</p>
+          <h2 className="text-4xl sm:text-5xl font-bold mb-4">Choose Your Plan</h2>
+          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+            Simple, transparent pricing in Indian Rupees. All plans include a 7-day free trial.
+          </p>
         </motion.div>
 
         <motion.div
@@ -103,11 +93,22 @@ export default function PricingSection() {
               }`}
             >
               {plan.highlighted && (
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                  <span className="px-4 py-1 rounded-full bg-gradient-to-r from-primary to-accent text-white text-sm font-semibold">
-                    Most Popular
-                  </span>
-                </div>
+                <>
+                  <motion.div
+                    animate={{ scale: [1, 1.05, 1] }}
+                    transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+                    className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-20 rounded-xl blur-xl"
+                  />
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <motion.span
+                      animate={{ scale: [1, 1.05, 1] }}
+                      transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+                      className="inline-block px-4 py-1 rounded-full bg-gradient-to-r from-primary to-accent text-white text-sm font-semibold"
+                    >
+                      Most Popular
+                    </motion.span>
+                  </div>
+                </>
               )}
 
               <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
@@ -119,6 +120,7 @@ export default function PricingSection() {
               </div>
 
               <button
+                onClick={onCtaClick}
                 className={`w-full py-3 px-6 rounded-lg font-semibold mb-8 transition-all ${
                   plan.highlighted
                     ? "bg-gradient-to-r from-primary to-accent text-white hover:shadow-lg hover:shadow-primary/50"

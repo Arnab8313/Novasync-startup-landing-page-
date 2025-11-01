@@ -10,10 +10,13 @@ import TestimonialsSection from "@/components/testimonials-section"
 import PricingSection from "@/components/pricing-section"
 import NewsletterSection from "@/components/newsletter-section"
 import Footer from "@/components/footer"
+import ComingSoonModal from "@/components/coming-soon-modal"
+import ScrollToTopButton from "@/components/scroll-to-top-button"
 
 export default function Home() {
   const [isDark, setIsDark] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [isComingSoonOpen, setIsComingSoonOpen] = useState(false)
 
   useEffect(() => {
     const isDarkMode =
@@ -61,14 +64,18 @@ export default function Home() {
         </button>
       </div>
 
-      <Navbar />
-      <HeroSection />
+      <ComingSoonModal isOpen={isComingSoonOpen} onClose={() => setIsComingSoonOpen(false)} />
+
+      <Navbar onCtaClick={() => setIsComingSoonOpen(true)} />
+      <HeroSection onCtaClick={() => setIsComingSoonOpen(true)} />
       <FeaturesSection />
-      <ProductSection />
+      <ProductSection onCtaClick={() => setIsComingSoonOpen(true)} />
       <TestimonialsSection />
-      <PricingSection />
+      <PricingSection onCtaClick={() => setIsComingSoonOpen(true)} />
       <NewsletterSection />
       <Footer />
+
+      <ScrollToTopButton />
     </main>
   )
 }
