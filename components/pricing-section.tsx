@@ -120,8 +120,13 @@ export default function PricingSection({ onCtaClick }: PricingSectionProps) {
               </div>
 
               <button
-                onClick={onCtaClick}
-                className={`w-full py-3 px-6 rounded-lg font-semibold mb-8 transition-all ${
+                type="button"
+                onClick={() => {
+                  if (onCtaClick) {
+                    onCtaClick()
+                  }
+                }}
+                className={`w-full py-3 px-6 rounded-lg font-semibold mb-8 transition-all pointer-events-auto ${
                   plan.highlighted
                     ? "bg-gradient-to-r from-primary to-accent text-white hover:shadow-lg hover:shadow-primary/50"
                     : "border border-primary text-primary hover:bg-primary hover:text-primary-foreground"
